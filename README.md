@@ -8,7 +8,7 @@ Bilder in einem Jahr an einer Wand!
 
 # Idee:
 Die freie Wand ist ca 5x4m groß. Mit je 50cm Abstand an allen Seiten bleibt
-eine Nettofläche von 4x3m. Das ist eine Format, für das man bedruckte Planen
+eine Nettofläche von 4x3m. Das ist ein Format, für das man bedruckte Planen
 bestellen kann. Wenn man an die Wand ein Befestigungsmethode macht (Schienen,
 Haken, etc), kann man alle 4 Wochen eine Plane abnehmen und durch eine neue
 ersetzen.
