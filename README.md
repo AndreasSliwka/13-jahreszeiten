@@ -18,6 +18,31 @@ ersetzen.
 ![Wand mit Platzhalterbild #3](./bilder/wand_3_with_placeholder.png)
 ![Wand mit Platzhalterbild #4](./bilder/wand_4_with_placeholder.png)
 
+# Auswahl der Kunstwerke
+
+## Das Kuratorium
+Hier stellen wir uns ein Kuratorium von 7 Personen vor, in dem die Sitze
+etwa wie folgt vergeben werden:
+* 2 Sitze für die Hausbesitzer (because.)
+* 2-3 Sitze Königswinterer Vereine
+  * Nicht Davor Und Nicht Dahinter eV
+  * Gemeinschaft Königswinterer Künstler
+  * Gewerbeverein Königswinter-Altstadt e.V
+* 2-3 Sitze lokale Künstler
+  * Hotspot KW
+  * Kunstlehrer CJD
+  * Kunstforum Palastweiher
+* 1-2 Spnsoren & Mäzene
+  * ???
+
+# (Halb-)Jahresplanung
+
+* Das Kuratorium trifft sich alle 6 Monate und plant die nächsten 24 Wochen bzw 6 Werke
+* Jeder Teilnehmer bringt als Vorschlag 1-2 Künstler mit
+* Die Vorschläge werden in eine Reihenfolge gebracht,
+* die ersten 6-8 Künstler werden angefragt. 
+  * wenn zuviele zusagen wandern sie ins nächste Halbjahr
+
 # Technische Umsetzung (Vorschlag)
 
 ## Fest montiert
