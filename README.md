@@ -46,9 +46,9 @@ etwa wie folgt vergeben werden:
 # Link und QR Code
 Alle gehängten Plakate bekommen ein Overlay mit der Webseite und einem darauf verweisenden QR Code
 
-![Gitarre](./bilder/Guitar_with_overlay.png)
-![Waldlichtung](./bilder/Waldlichtung_with_overlay.png)
-![Mona Lisa](./bilder/monalisa_with_overlay.png)
+![Gitarre](./bilder/wand_2_with_placeholder.png)
+![Waldlichtung](./bilder/wand_2_with_waldlichtung.png)
+![Mona Lisa](./bilder/monalisa_with_monalisa.png)
 
 # Technische Umsetzung (Vorschlag)
 
