@@ -43,6 +43,13 @@ etwa wie folgt vergeben werden:
 * die ersten 6-8 Künstler werden angefragt. 
   * wenn zuviele zusagen wandern sie ins nächste Halbjahr
 
+# Link und QR Code
+Alle gehängten Plakate bekommen ein Overlay mit der Webseite und einem darauf verweisenden QR Code
+
+![Gitarre](Guitar_with_overlay.png)
+![Waldlichtung](Waldlichtung_with_overlay.png)
+![Mona Lisa](monalisa_with_overlay.png)
+
 # Technische Umsetzung (Vorschlag)
 
 ## Vorschlag #1: Spannrahmen
