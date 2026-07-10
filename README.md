@@ -13,7 +13,10 @@ bestellen kann. Wenn man an die Wand ein Befestigungsmethode macht (Schienen,
 Haken, etc), kann man alle 4 Wochen eine Plane abnehmen und durch eine neue
 ersetzen.
 
-
+![Wand mit Platzhalterbild #1](./bilder/wand_1_with_placeholder.png)
+![Wand mit Platzhalterbild #2](./bilder/wand_2_with_placeholder.png)
+![Wand mit Platzhalterbild #3](./bilder/wand_3_with_placeholder.png)
+![Wand mit Platzhalterbild #4](./bilder/wand_4_with_placeholder.png)
 
 # Gestaltungssatzung vs Kunstfreiheit
 
