@@ -61,8 +61,9 @@ am Gestänge befestigt.
 ### Fest montiert
 Eine Platte im Maß 400x300 [wird an die Wand montiert](https://www.bannerstop.com/produkte/rahmen-systeme/fassaden-rahmen/blindrahmen.html)
 ![Beispiel](./bilder/Blindrahmen_400x300.png)
+
 ### Wechselbar
-Spezielle Plannen mit 420x320 und Gummiband werden über die Platte gehängt, un
+Spezielle Plannen mit 420x320 und Gummiband werden über die Platte gehängt, und der Überhang hinter der Platte verspannt
 
 ## Vorschlag #3: Direkt an die Wand
 
