@@ -45,7 +45,28 @@ etwa wie folgt vergeben werden:
 
 # Technische Umsetzung (Vorschlag)
 
-## Fest montiert
+## Vorschlag #1: Spannrahmen
+
+### Fest montiert
+Röhrenrahmen mit 430x330cm an der Wand befestigen
+![Beispiel](bilder/Spannrahmen_400x300.png)
+
+### Wechselbar
+
+Beliebige Planen mit Maß 400x300cm und Ösen. Die Plane wird mit Gummispannern
+am Gestänge befestigt.
+
+## Vorschlag #2: Blindrahmen (AKA Spannbettlaken)
+
+### Fest montiert
+Eine Platte im Maß 400x300 [wird an die Wand montiert](https://www.bannerstop.com/produkte/rahmen-systeme/fassaden-rahmen/blindrahmen.html)
+![Beispiel](./bilder/Blindrahmen_400x300.png)
+### Wechselbar
+Spezielle Plannen mit 420x320 und Gummiband werden über die Platte gehängt, un
+
+## Vorschlag #3: Direkt an die Wand
+
+### Fest montiert
 14 Gewindestangen in der Wand: 
 * je 5 oben und unten
 * je 2 links und rechts
@@ -54,8 +75,7 @@ Die Montagepunkte ziehen ein Rechteck im Format 4x3m, mit einem Abstand von jewe
 
 ![Wand mit Montagepunkten](./bilder/wand_1_with_hooks.jpeg)
 
-
-## Wechselbar
+### Wechselbar
 
 Bedruckte Planen im passenden Format mit eingelassenen Ösen an den Positionen der Haken. 
 Die Plane wird an den Ösen über die Gewindestangen gehängt und mit Unterlegscheiben und
