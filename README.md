@@ -48,7 +48,7 @@ Alle gehängten Plakate bekommen ein Overlay mit der Webseite und einem darauf v
 
 ![Gitarre](./bilder/wand_2_with_placeholder.png)
 ![Waldlichtung](./bilder/wand_2_with_waldlichtung.png)
-![Mona Lisa](./bilder/monalisa_with_monalisa.png)
+![Mona Lisa](./bilder/wand_2_with_monalisa.png)
 
 # Technische Umsetzung (Vorschlag)
 
