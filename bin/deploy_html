@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e -x
+
+cd `git rev-parse --show-toplevel`
+cd html
+TMP_FILE=`mktemp`
+cat >$TMP_FILE <<SFTP_COMMANDS
+put -r .
+lls -l
+SFTP_COMMANDS
+
+grep . $TMP_FILE
+
+sftp -b $TMP_FILE a747993@access-5014187981.ud-webspace.de
