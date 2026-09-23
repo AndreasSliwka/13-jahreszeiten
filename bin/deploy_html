@@ -5,6 +5,7 @@ cd `git rev-parse --show-toplevel`
 cd html
 TMP_FILE=`mktemp`
 cat >$TMP_FILE <<SFTP_COMMANDS
+cd 13-jahreszeiten
 put -r .
 lls -l
 SFTP_COMMANDS
