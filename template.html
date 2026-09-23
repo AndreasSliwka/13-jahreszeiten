@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>13 Jahreszeiten</title>
+  <title>{{SITE_TITLE}}</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -285,28 +285,28 @@
   <section class="hero">
     <img
       class="hero__img"
-      src="../bilder/wand_2_with_monalisa.png"
-      alt="Mona Lisa – Leonardo da Vinci"
+      src="{{CURRENT_IMAGE}}"
+      alt="{{CURRENT_IMAGE_ALT}}"
     />
     <div class="hero__bar">
-      <span class="hero__bar-title">13 Jahreszeiten</span>
-      <span class="hero__bar-season">Saison&nbsp;07&nbsp;/&nbsp;13</span>
+      <span class="hero__bar-title">{{SITE_TITLE}}</span>
+      <span class="hero__bar-season">Saison&nbsp;{{SEASON_NUMBER}}&nbsp;/&nbsp;{{TOTAL_SEASONS}}</span>
     </div>
   </section>
 
   <!-- CURRENT ARTWORK -->
   <section class="artwork">
     <p class="artwork__eyebrow">Aktuelles Werk</p>
-    <h1 class="artwork__title">Mona Lisa</h1>
+    <h1 class="artwork__title">{{CURRENT_TITLE}}</h1>
     <div class="artwork__meta">
-      <span class="artwork__artist">Leonardo da Vinci</span>
+      <span class="artwork__artist">{{CURRENT_ARTIST}}</span>
       <span class="artwork__countdown">
         <span class="artwork__countdown-dot"></span>
-        Noch 27 Tage
+        {{DAYS_REMAINING_LABEL}}
       </span>
     </div>
     <hr class="artwork__rule" />
-    <p class="artwork__dates">23.09.2026–20.10.2026</p>
+    <p class="artwork__dates">{{DATE_RANGE}}</p>
   </section>
 
   <!-- PAST WORKS -->
@@ -314,31 +314,13 @@
     <div class="past__inner">
       <p class="past__label">Frühere Werke</p>
       <div class="past__grid">
-        
+        <!-- TEMPLATE:PAST_ITEM
         <div class="past__item">
-          <img src="../bilder/Waldlichtung_with_overlay.png" alt="Waldlichtung" />
-          <div class="past__item-label">Saison 06 &middot; Waldlichtung &middot; Unbekannt</div>
+          <img src="{{IMAGE}}" alt="{{TITLE}}" />
+          <div class="past__item-label">Saison {{SEASON_NUM}} &middot; {{TITLE}} &middot; {{ARTIST}}</div>
         </div>
-<div class="past__item">
-          <img src="../bilder/Guitar_with_overlay.png" alt="Gitarre" />
-          <div class="past__item-label">Saison 05 &middot; Gitarre &middot; Unbekannt</div>
-        </div>
-<div class="past__item">
-          <img src="../bilder/wand_2_with_waldlichtung.png" alt="Waldlichtung (Wand)" />
-          <div class="past__item-label">Saison 04 &middot; Waldlichtung (Wand) &middot; Unbekannt</div>
-        </div>
-<div class="past__item">
-          <img src="wand_3_with_placeholder.png" alt="Platzhalter III" />
-          <div class="past__item-label">Saison 03 &middot; Platzhalter III &middot; Unbekannt</div>
-        </div>
-<div class="past__item">
-          <img src="wand_4_with_placeholder.png" alt="Platzhalter IV" />
-          <div class="past__item-label">Saison 02 &middot; Platzhalter IV &middot; Unbekannt</div>
-        </div>
-<div class="past__item">
-          <img src="wand_1_with_placeholder.png" alt="Platzhalter I" />
-          <div class="past__item-label">Saison 01 &middot; Platzhalter I &middot; Unbekannt</div>
-        </div>
+        -->
+        {{PAST_WORKS}}
       </div>
     </div>
   </section>
@@ -360,7 +342,7 @@
   </section>
 
   <footer>
-    <strong>13 Jahreszeiten</strong> · Kunst im öffentlichen Raum · Königswinter
+    <strong>{{SITE_TITLE}}</strong> · Kunst im öffentlichen Raum · {{LOCATION}}
   </footer>
 
 </body>
