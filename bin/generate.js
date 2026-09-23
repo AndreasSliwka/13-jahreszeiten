@@ -84,14 +84,21 @@ function fill(template, vars) {
   return template.replace(/{{(\w+)}}/g, (_, key) => vars[key] ?? '');
 }
 
+function artistLink(item) {
+  if (!item.artist_url) return item.artist;
+  return `<a href="${item.artist_url}" target="_blank" rel="noopener noreferrer">${item.artist}</a>`;
+}
+
 function renderPastItem(item, seasonNum) {
   return fill(itemTpl, {
-    IMAGE:      item.image,
-    TITLE:      item.title,
-    ARTIST:     item.artist,
-    SEASON_NUM: String(seasonNum).padStart(2, '0'),
-    DATE_FROM:  formatDE(item.dateFrom),
-    DATE_TO:    formatDE(item.dateTo),
+    IMAGE:       item.image,
+    TITLE:       item.title,
+    ARTIST:      item.artist,
+    ARTIST_LINK: artistLink(item),
+    DESCRIPTION: item.description ?? '',
+    SEASON_NUM:  String(seasonNum).padStart(2, '0'),
+    DATE_FROM:   formatDE(item.dateFrom),
+    DATE_TO:     formatDE(item.dateTo),
   });
 }
 
@@ -101,17 +108,19 @@ const pastHtml = seasons
   .join('\n');
 
 const vars = {
-  SITE_TITLE:           data.siteTitle ?? '13 Jahreszeiten',
-  LOCATION:             data.location  ?? 'Königswinter',
-  CURRENT_IMAGE:        current.image,
-  CURRENT_IMAGE_ALT:    `${current.title} \u2013 ${current.artist}`,
-  CURRENT_TITLE:        current.title,
-  CURRENT_ARTIST:       current.artist,
-  SEASON_NUMBER:        String(currentSeason).padStart(2, '0'),
-  TOTAL_SEASONS:        String(totalSeasons),
-  DATE_RANGE:           `${formatDE(current.dateFrom)}\u2013${formatDE(current.dateTo)}`,
-  DAYS_REMAINING_LABEL: countdownLabel(current),
-  PAST_WORKS:           pastHtml,
+  SITE_TITLE:            data.siteTitle ?? '13 Jahreszeiten',
+  LOCATION:              data.location  ?? 'Königswinter',
+  CURRENT_IMAGE:         current.image,
+  CURRENT_IMAGE_ALT:     `${current.title} \u2013 ${current.artist}`,
+  CURRENT_TITLE:         current.title,
+  CURRENT_ARTIST:        current.artist,
+  CURRENT_ARTIST_LINK:   artistLink(current),
+  CURRENT_DESCRIPTION:   current.description ?? '',
+  SEASON_NUMBER:         String(currentSeason).padStart(2, '0'),
+  TOTAL_SEASONS:         String(totalSeasons),
+  DATE_RANGE:            `${formatDE(current.dateFrom)}\u2013${formatDE(current.dateTo)}`,
+  DAYS_REMAINING_LABEL:  countdownLabel(current),
+  PAST_WORKS:            pastHtml,
 };
 
 // ── RENDER & WRITE ───────────────────────────────────────────────────────────

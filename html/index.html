@@ -144,9 +144,28 @@
     }
 
     .artwork__dates {
-      font-size: 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--mid);
+    }
+
+    .artwork__description {
+      font-size: 1.05rem;
       line-height: 1.7;
       color: var(--mid);
+      max-width: 560px;
+      margin-top: 16px;
+    }
+
+    .artwork__artist a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: var(--primary);
+      text-underline-offset: 3px;
+    }
+
+    .artwork__artist a:hover {
+      color: var(--primary);
     }
 
     /* ── PAST WORKS ───────────────────────────────── */
@@ -299,7 +318,7 @@
     <p class="artwork__eyebrow">Aktuelles Werk</p>
     <h1 class="artwork__title">Mona Lisa</h1>
     <div class="artwork__meta">
-      <span class="artwork__artist">Leonardo da Vinci</span>
+      <span class="artwork__artist"><a href="https://de.wikipedia.org/wiki/Leonardo_da_Vinci" target="_blank" rel="noopener noreferrer">Leonardo da Vinci</a></span>
       <span class="artwork__countdown">
         <span class="artwork__countdown-dot"></span>
         Noch 27 Tage
@@ -307,6 +326,7 @@
     </div>
     <hr class="artwork__rule" />
     <p class="artwork__dates">23.09.2026–20.10.2026</p>
+    <p class="artwork__description">Das berühmteste Gemälde der Welt besucht die Fußgängerzone Königswinters. Leonardo da Vinci malte das Porträt der Lisa Gherardini zwischen 1503 und 1519 – seitdem ist es der Inbegriff künstlerischer Vollendung. Der rätselhafte Blick folgt einem auf Schritt und Tritt.</p>
   </section>
 
   <!-- PAST WORKS -->
@@ -315,27 +335,27 @@
       <p class="past__label">Frühere Werke</p>
       <div class="past__grid">
         
-        <div class="past__item">
+        <div class="past__item" title="Eine stille Lichtung im Gegenlicht der Morgensonne. Das Werk holt die Natur der Siebengebirgshänge in die Fußgängerzone – ein ruhiger Gegenpol zum Treiben der Altstadt.">
           <img src="../bilder/Waldlichtung_with_overlay.png" alt="Waldlichtung" />
           <div class="past__item-label">Saison 06 &middot; Waldlichtung &middot; Unbekannt</div>
         </div>
-<div class="past__item">
+<div class="past__item" title="Eine akustische Gitarre, in Szene gesetzt wie ein Stillleben. Das Bild erinnert an die Musik, die in den Gassen Königswinters immer wieder zu hören ist – bei Straßenmusik, Festivals und an lauen Sommerabenden am Rhein.">
           <img src="../bilder/Guitar_with_overlay.png" alt="Gitarre" />
           <div class="past__item-label">Saison 05 &middot; Gitarre &middot; Unbekannt</div>
         </div>
-<div class="past__item">
+<div class="past__item" title="Dasselbe Motiv, eine andere Wand: die Waldlichtung als großformatige Fotografie direkt an der Hausfassade. Ein Experiment in Maßstab und Ort.">
           <img src="../bilder/wand_2_with_waldlichtung.png" alt="Waldlichtung (Wand)" />
           <div class="past__item-label">Saison 04 &middot; Waldlichtung (Wand) &middot; Unbekannt</div>
         </div>
-<div class="past__item">
+<div class="past__item" title="Dieses Werk ist noch nicht dokumentiert. Informationen werden nachgereicht.">
           <img src="wand_3_with_placeholder.png" alt="Platzhalter III" />
           <div class="past__item-label">Saison 03 &middot; Platzhalter III &middot; Unbekannt</div>
         </div>
-<div class="past__item">
+<div class="past__item" title="Dieses Werk ist noch nicht dokumentiert. Informationen werden nachgereicht.">
           <img src="wand_4_with_placeholder.png" alt="Platzhalter IV" />
           <div class="past__item-label">Saison 02 &middot; Platzhalter IV &middot; Unbekannt</div>
         </div>
-<div class="past__item">
+<div class="past__item" title="Das erste Werk der Reihe 13 Jahreszeiten, mit dem alles begann. Details werden nachgereicht.">
           <img src="wand_1_with_placeholder.png" alt="Platzhalter I" />
           <div class="past__item-label">Saison 01 &middot; Platzhalter I &middot; Unbekannt</div>
         </div>

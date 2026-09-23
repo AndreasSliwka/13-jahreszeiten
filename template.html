@@ -144,9 +144,28 @@
     }
 
     .artwork__dates {
-      font-size: 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--mid);
+    }
+
+    .artwork__description {
+      font-size: 1.05rem;
       line-height: 1.7;
       color: var(--mid);
+      max-width: 560px;
+      margin-top: 16px;
+    }
+
+    .artwork__artist a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: var(--primary);
+      text-underline-offset: 3px;
+    }
+
+    .artwork__artist a:hover {
+      color: var(--primary);
     }
 
     /* ── PAST WORKS ───────────────────────────────── */
@@ -299,7 +318,7 @@
     <p class="artwork__eyebrow">Aktuelles Werk</p>
     <h1 class="artwork__title">{{CURRENT_TITLE}}</h1>
     <div class="artwork__meta">
-      <span class="artwork__artist">{{CURRENT_ARTIST}}</span>
+      <span class="artwork__artist">{{CURRENT_ARTIST_LINK}}</span>
       <span class="artwork__countdown">
         <span class="artwork__countdown-dot"></span>
         {{DAYS_REMAINING_LABEL}}
@@ -307,6 +326,7 @@
     </div>
     <hr class="artwork__rule" />
     <p class="artwork__dates">{{DATE_RANGE}}</p>
+    <p class="artwork__description">{{CURRENT_DESCRIPTION}}</p>
   </section>
 
   <!-- PAST WORKS -->
@@ -315,7 +335,7 @@
       <p class="past__label">Frühere Werke</p>
       <div class="past__grid">
         <!-- TEMPLATE:PAST_ITEM
-        <div class="past__item">
+        <div class="past__item" title="{{DESCRIPTION}}">
           <img src="{{IMAGE}}" alt="{{TITLE}}" />
           <div class="past__item-label">Saison {{SEASON_NUM}} &middot; {{TITLE}} &middot; {{ARTIST}}</div>
         </div>
