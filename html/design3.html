@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13 Jahreszeiten – Mona Lisa · Saison 07 · 2026</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Base ── */
+    html { font-size: 16px; }
+    body {
+      background: #1A1814;
+      color: #E8E2D5;
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 36px 96px;
+    }
+
+    /* ── Eyebrow ── */
+    .eyebrow {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.67rem;
+      letter-spacing: 0.22em;
+      color: #7A7068;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .header-rule {
+      border: none;
+      border-top: 1px solid #2C2820;
+      margin-bottom: 22px;
+    }
+
+    /* ── Site Title Bar ── */
+    .site-header {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 52px;
+    }
+
+    .site-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: bold;
+      color: #E8E2D5;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .gold-rule-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, #C8983A, rgba(200, 152, 58, 0.08));
+      min-width: 0;
+    }
+
+    /* ── Gallery Figure ── */
+    /* Padding creates space for the mounting-corner marks */
+    .gallery-figure {
+      margin: 0 0 48px;
+      position: relative;
+      padding: 12px;
+    }
+
+    /*
+     * Signature element: mounting corners
+     * L-shaped gold lines at each corner of the figure — like the aluminum
+     * corner mounts used to pin large-format exhibition prints to a wall.
+     * They sit outside the gold frame, making the whole thing read as a
+     * gallery object rather than a web image.
+     */
+    .mount-corner {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-color: rgba(200, 152, 58, 0.5);
+      border-style: solid;
+    }
+    .mount-tl { top: 0;    left: 0;   border-width: 2px 0 0 2px; }
+    .mount-tr { top: 0;    right: 0;  border-width: 2px 2px 0 0; }
+    .mount-bl { bottom: 0; left: 0;   border-width: 0 0 2px 2px; }
+    .mount-br { bottom: 0; right: 0;  border-width: 0 2px 2px 0; }
+
+    /* Outer gold border */
+    .frame-outer {
+      border: 2px solid #C8983A;
+    }
+
+    /* Dark mat with inset shadow — simulates physical matting depth */
+    .frame-mat {
+      background: #2C2820;
+      padding: 36px;
+      box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.6),
+        inset 0 0 60px rgba(0, 0, 0, 0.28);
+    }
+
+    .frame-mat img {
+      display: block;
+      width: 100%;
+      height: auto;
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.65);
+    }
+
+    /* ── Artwork Metadata ── */
+    .artwork-meta {
+      margin-bottom: 36px;
+    }
+
+    .season-label {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.67rem;
+      letter-spacing: 0.26em;
+      color: #C8983A;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .artwork-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2rem, 5.5vw, 2.9rem);
+      font-weight: normal;
+      font-style: italic;
+      color: #E8E2D5;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .artist-line {
+      font-size: 0.95rem;
+      color: #B0A898;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px 8px;
+    }
+
+    .dot-sep {
+      color: #4A443E;
+    }
+
+    .medium {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.7rem;
+      color: #7A7068;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Wall Label ── */
+    .wall-label {
+      border-left: 3px solid #8B1A35;
+      padding: 4px 0 4px 28px;
+      margin-bottom: 56px;
+    }
+
+    .wall-label-heading {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.61rem;
+      letter-spacing: 0.22em;
+      color: #8B1A35;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .wall-label-text {
+      font-size: 1.075rem;
+      line-height: 1.82;
+      color: #C0B8AE;
+      max-width: 660px;
+    }
+
+    /* ── Gold Divider ── */
+    .gold-divider {
+      position: relative;
+      margin: 0 0 52px;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        #C8983A 22%,
+        #C8983A 78%,
+        transparent 100%
+      );
+    }
+
+    .gold-divider::after {
+      content: '◆';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1A1814;
+      color: #C8983A;
+      font-size: 0.5rem;
+      padding: 0 12px;
+      line-height: 1;
+    }
+
+    /* ── About / Über ── */
+    .about-section {
+      background: #F5F0E5;
+      color: #1A1814;
+      padding: 48px 52px;
+      margin-bottom: 64px;
+      position: relative;
+    }
+
+    /* Thin gold bar across the top of the aged-paper block */
+    .about-section::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: #C8983A;
+    }
+
+    .about-heading {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.64rem;
+      font-weight: normal;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #7A7068;
+      margin-bottom: 28px;
+    }
+
+    .about-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .about-columns p {
+      font-family: Georgia, serif;
+      font-size: 0.975rem;
+      line-height: 1.88;
+      color: #2C2820;
+    }
+
+    /* ── Archive – past works ── */
+    .archive {
+      margin-bottom: 64px;
+    }
+
+    .archive-eyebrow {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.22em;
+      color: #7A7068;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .mini-frame {
+      margin: 0;
+    }
+
+    .mini-frame-outer {
+      border: 1px solid rgba(200, 152, 58, 0.38);
+      margin-bottom: 12px;
+    }
+
+    .mini-frame-mat {
+      background: #2C2820;
+      padding: 12px;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.55);
+    }
+
+    .mini-frame-mat img {
+      display: block;
+      width: 100%;
+      height: auto;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .mini-figcaption {
+      font-size: 0.75rem;
+      color: #7A7068;
+      line-height: 1.4;
+    }
+
+    .mini-figcaption em {
+      display: block;
+      color: #B0A898;
+      font-style: italic;
+      margin-bottom: 2px;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      border-top: 1px solid rgba(200, 152, 58, 0.14);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-brand {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.875rem;
+      color: #4A443E;
+      font-style: italic;
+    }
+
+    .footer-meta {
+      font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      color: #3A342E;
+      text-transform: uppercase;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 36px 18px 60px;
+      }
+      .frame-mat {
+        padding: 16px;
+      }
+      .about-section {
+        padding: 32px 24px;
+      }
+      .about-columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .archive-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+        gap: 32px;
+      }
+      .page-footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+<main class="container">
+
+  <!-- ── Header ── -->
+  <header>
+    <p class="eyebrow">Kunst im öffentlichen Raum · Königswinter</p>
+    <hr class="header-rule">
+    <div class="site-header">
+      <h1 class="site-title">13 Jahreszeiten</h1>
+      <div class="gold-rule-line"></div>
+    </div>
+  </header>
+
+  <!-- ── Gallery Frame ── -->
+  <figure class="gallery-figure">
+    <span class="mount-corner mount-tl"></span>
+    <span class="mount-corner mount-tr"></span>
+    <span class="mount-corner mount-bl"></span>
+    <span class="mount-corner mount-br"></span>
+    <div class="frame-outer">
+      <div class="frame-mat">
+        <img
+          src="../bilder/wand_2_with_monalisa.png"
+          alt="Die Mona Lisa als 4×3-Meter-Banner an der Hauswand in der Königswinterer Fußgängerzone"
+        >
+      </div>
+    </div>
+  </figure>
+
+  <!-- ── Artwork Metadata ── -->
+  <div class="artwork-meta">
+    <p class="season-label">Saison 07 · 2026</p>
+    <h2 class="artwork-title">Mona Lisa</h2>
+    <p class="artist-line">
+      Leonardo da Vinci
+      <span class="dot-sep">·</span>
+      <span class="medium">Öl auf Pappelholz, ca. 1503–1519</span>
+    </p>
+  </div>
+
+  <!-- ── Wall Label ── -->
+  <div class="wall-label">
+    <p class="wall-label-heading">Werkbeschreibung</p>
+    <p class="wall-label-text">Als würde das Louvre eine Dependance in der Fußgängerzone eröffnen: Leonardo da Vincis <em>Mona Lisa</em> – das vielleicht meistbetrachtete Bild der Welt – hält Einzug in Königswinters Altstadt. Für 28 Tage ist sie hier. Dann kommt das Nächste.</p>
+  </div>
+
+  <!-- ── Divider ── -->
+  <div class="gold-divider"></div>
+
+  <!-- ── Über die Initiative ── -->
+  <section class="about-section">
+    <p class="about-heading">Über die Initiative</p>
+    <div class="about-columns">
+      <p>Dreizehnmal im Jahr wechselt das Bild an der Wand des Hauses in der Königswinterer Fußgängerzone. Ein Kuratorium aus Künstlerinnen, Vereinen und Anwohnern wählt die Werke.</p>
+      <p>Manche sind weltbekannt. Manche sind es noch nicht. Jedes Bild bleibt genau 28 Tage – eine von dreizehn Jahreszeiten, die das Jahr hier zählt.</p>
+    </div>
+  </section>
+
+  <!-- ── Frühere Werke ── -->
+  <section class="archive">
+    <p class="archive-eyebrow">Frühere Werke</p>
+    <div class="archive-grid">
+
+      <figure class="mini-frame">
+        <div class="mini-frame-outer">
+          <div class="mini-frame-mat">
+            <img src="../bilder/Waldlichtung_with_overlay.png" alt="Waldlichtung">
+          </div>
+        </div>
+        <figcaption class="mini-figcaption">
+          <em>Waldlichtung</em>
+          Saison 05 · 2026
+        </figcaption>
+      </figure>
+
+      <figure class="mini-frame">
+        <div class="mini-frame-outer">
+          <div class="mini-frame-mat">
+            <img src="../bilder/Guitar_with_overlay.png" alt="Gitarre">
+          </div>
+        </div>
+        <figcaption class="mini-figcaption">
+          <em>Gitarre</em>
+          Saison 06 · 2026
+        </figcaption>
+      </figure>
+
+      <figure class="mini-frame">
+        <div class="mini-frame-outer">
+          <div class="mini-frame-mat">
+            <img src="../bilder/monalisa_with_overlay.png" alt="Mona Lisa (Kunstdruck)">
+          </div>
+        </div>
+        <figcaption class="mini-figcaption">
+          <em>Mona Lisa</em>
+          Saison 07 · 2026
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="page-footer">
+    <span class="footer-brand">13 Jahreszeiten · Königswinter</span>
+    <span class="footer-meta">Kunst im öffentlichen Raum · seit 2025</span>
+  </footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="13 Jahreszeiten – Öffentliche Kunst in Königswinter. Saison 7 von 13: Mona Lisa von Leonardo da Vinci.">
+  <title>Saison 07 / 13 — 13 Jahreszeiten</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --sky:      #EDF4FA;
+      --panel:    #FAFAF8;
+      --amber:    #F4A435;
+      --steel:    #1A2E3B;
+      --muted:    #4A6578;
+      --inactive: #C8D8E4;
+
+      --font-display: 'Arial Narrow', 'Impact', sans-serif;
+      --font-body:    Georgia, 'Times New Roman', serif;
+      --font-label:   ui-monospace, 'SF Mono', Consolas, monospace;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--sky);
+      color: var(--steel);
+      font-family: var(--font-body);
+      min-height: 100vh;
+    }
+
+    /* ─── HERO SPLIT ──────────────────────────────────────── */
+
+    .hero {
+      display: flex;
+      height: 100vh;
+      min-height: 580px;
+    }
+
+    /* Left 55% — full-bleed building photo */
+    .hero__photo {
+      flex: 0 0 55%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.5rem;
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* Right 45% — info panel */
+    .hero__panel {
+      flex: 0 0 45%;
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      gap: 1.2rem;
+      overflow-y: auto;
+    }
+
+    /* ─── BRAND MARK ──────────────────────────────────────── */
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
+      align-self: flex-start;
+      width: 100%;
+    }
+
+    .brand__mark {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .brand__name {
+      font-family: var(--font-label);
+      font-size: 0.63rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── EYEBROW ─────────────────────────────────────────── */
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      width: 100%;
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--inactive);
+    }
+
+    /* ─── SAISON-UHR ──────────────────────────────────────── */
+
+    .clock-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 215px;
+    }
+
+    .clock-wrap svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .clock-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .clock-center__number {
+      font-family: var(--font-display);
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: var(--amber);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .clock-center__sub {
+      font-family: var(--font-label);
+      font-size: 0.52rem;
+      color: var(--muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 0.1rem;
+    }
+
+    /* ─── ARTWORK INFO ────────────────────────────────────── */
+
+    .artwork-title {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--steel);
+      line-height: 1;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .artwork-artist {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.975rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: -0.4rem;
+    }
+
+    .artwork-desc {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      line-height: 1.78;
+      color: var(--muted);
+      text-align: center;
+      max-width: 32ch;
+    }
+
+    /* ─── COUNTDOWN PILL ──────────────────────────────────── */
+
+    .countdown {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--sky);
+      border: 1.5px solid var(--inactive);
+      border-radius: 100px;
+      padding: 0.5rem 1.2rem;
+    }
+
+    .countdown__dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .countdown__text {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .countdown__text strong {
+      color: var(--steel);
+      font-weight: 700;
+    }
+
+    /* ─── BELOW FOLD ──────────────────────────────────────── */
+
+    .below {
+      padding: 4.5rem 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-label);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.1rem;
+    }
+
+    .about-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--inactive);
+      margin: 3.5rem 0;
+    }
+
+    /* ─── PAST ARTWORKS GRID ──────────────────────────────── */
+
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .past-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .past-item img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      filter: brightness(0.93) saturate(0.92);
+      transition: filter 0.3s ease;
+    }
+
+    .past-item img:hover {
+      filter: brightness(1.03) saturate(1.05);
+    }
+
+    .past-item__season {
+      font-family: var(--font-label);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .past-item__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--steel);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+
+    .site-footer {
+      background: var(--steel);
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--font-label);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      color: var(--inactive);
+      text-transform: uppercase;
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────────────── */
+
+    @keyframes drawArc {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration:    0.001ms !important;
+        animation-delay:       0ms     !important;
+        transition-duration:   0.001ms !important;
+      }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+
+    @media (max-width: 700px) {
+      .hero {
+        flex-direction: column;
+        height: auto;
+        min-height: unset;
+      }
+
+      .hero__photo {
+        flex: 0 0 auto;
+        height: 58vw;
+      }
+
+      .hero__panel {
+        padding: 2rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .artwork-title {
+        font-size: 1.65rem;
+      }
+
+      .past-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+
+      .below {
+        padding: 2.75rem 1.25rem;
+      }
+    }
+
+    @media (min-width: 701px) and (max-width: 960px) {
+      .hero__panel {
+        padding: 2rem 1.75rem;
+      }
+
+      .artwork-title {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HERO SPLIT SCREEN ═══════════════════════════════════ -->
+  <section class="hero">
+
+    <!-- Left: building photo (55%) -->
+    <div class="hero__photo">
+      <img
+        src="../bilder/wand_2_with_monalisa.png"
+        alt="Großformatiges Kunstwerk Mona Lisa an der Hauswand in der Fußgängerzone Königswinter"
+      />
+      <span class="photo-caption">Fußgängerzone · Königswinter</span>
+    </div>
+
+    <!-- Right: info panel (45%) -->
+    <div class="hero__panel">
+
+      <div class="brand">
+        <span class="brand__mark">13</span>
+        <span class="brand__name">Jahreszeiten</span>
+      </div>
+
+      <div class="eyebrow">Saison 07 / 13</div>
+
+      <!-- Saison-Uhr SVG (JS-generated segments below) -->
+      <div class="clock-wrap">
+        <svg
+          id="clock-svg"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Saison-Uhr: Saison 7 von 13 aktiv"
+        >
+          <g id="clock-segments"></g>
+        </svg>
+        <div class="clock-center" aria-hidden="true">
+          <div class="clock-center__number">07</div>
+          <div class="clock-center__sub">von 13</div>
+        </div>
+      </div>
+
+      <h1 class="artwork-title">Mona Lisa</h1>
+      <p class="artwork-artist">Leonardo da Vinci</p>
+
+      <p class="artwork-desc">
+        Eine der bekanntesten Persönlichkeiten der Kunstgeschichte besucht
+        die Fußgängerzone Königswinters.
+      </p>
+
+      <div class="countdown">
+        <span class="countdown__dot" aria-hidden="true"></span>
+        <span class="countdown__text">
+          Nächster Wechsel in <strong>18 Tagen</strong>
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ BELOW FOLD ═══════════════════════════════════════════ -->
+  <main class="below">
+
+    <p class="section-eyebrow">Über das Projekt</p>
+    <p class="about-text">
+      13 Jahreszeiten bespielt das Jahr mit dreizehn Kunstepochen.
+      Alle vier Wochen wechselt ein großformatiges Kunstwerk an der Hauswand
+      in der Fußgängerzone Königswinters — sichtbar für alle, die vorbeigehen.
+      Der QR-Code auf jedem Banner führt hierher. Das Projekt verbindet Kunst
+      mit Alltag, Museum mit Straße.
+    </p>
+
+    <hr class="divider" />
+
+    <p class="section-eyebrow">Frühere Saisonen</p>
+    <div class="past-grid">
+
+      <div class="past-item">
+        <img src="../bilder/Waldlichtung_with_overlay.png" alt="Waldlichtung an der Wand" />
+        <span class="past-item__season">Saison 05</span>
+        <span class="past-item__title">Waldlichtung</span>
+      </div>
+
+      <div class="past-item">
+        <img src="../bilder/Guitar_with_overlay.png" alt="Guitar an der Wand" />
+        <span class="past-item__season">Saison 06</span>
+        <span class="past-item__title">Guitar</span>
+      </div>
+
+      <div class="past-item">
+        <img src="../bilder/monalisa_with_overlay.png" alt="Mona Lisa an der Wand" />
+        <span class="past-item__season">Saison 07</span>
+        <span class="past-item__title">Mona Lisa</span>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 13 Jahreszeiten &nbsp;·&nbsp; Königswinter &nbsp;·&nbsp; Kunst im öffentlichen Raum
+  </footer>
+
+  <!-- ═══ SAISON-UHR GENERATOR ═════════════════════════════════
+       Builds 13 arc-path segments via JS, then CSS @keyframes
+       drawArc animates stroke-dashoffset → 0 (staggered).
+  ═══════════════════════════════════════════════════════════════ -->
+  <script>
+  (function () {
+    'use strict';
+
+    var g = document.getElementById('clock-segments');
+    if (!g) return;
+
+    var cx         = 100;
+    var cy         = 100;
+    var r          = 74;          // ring mid-radius
+    var total      = 13;
+    var activeIdx  = 6;           // 0-indexed → segment 7
+    var gapDeg     = 2.5;         // degrees of blank space between segments
+    var degsPerSeg = 360 / total;
+
+    for (var i = 0; i < total; i++) {
+      var startDeg = i * degsPerSeg - 90 + gapDeg / 2;
+      var endDeg   = (i + 1) * degsPerSeg - 90 - gapDeg / 2;
+
+      var startRad = startDeg * Math.PI / 180;
+      var endRad   = endDeg   * Math.PI / 180;
+
+      var x1 = cx + r * Math.cos(startRad);
+      var y1 = cy + r * Math.sin(startRad);
+      var x2 = cx + r * Math.cos(endRad);
+      var y2 = cy + r * Math.sin(endRad);
+
+      // Arc length of the drawn portion (excluding gap)
+      var arcLen = ((degsPerSeg - gapDeg) / 360) * 2 * Math.PI * r;
+
+      var isActive = (i === activeIdx);
+
+      var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+      path.setAttribute('d',
+        'M ' + x1.toFixed(3) + ',' + y1.toFixed(3) +
+        ' A ' + r + ',' + r + ' 0 0,1 ' +
+        x2.toFixed(3) + ',' + y2.toFixed(3)
+      );
+      path.setAttribute('stroke',        isActive ? '#F4A435' : '#C8D8E4');
+      path.setAttribute('stroke-width',  isActive ? '20' : '14');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('fill', 'none');
+
+      // CSS animation: draws the arc in via stroke-dashoffset
+      path.style.strokeDasharray  = arcLen.toFixed(3);
+      path.style.strokeDashoffset = arcLen.toFixed(3);
+      path.style.animation        = 'drawArc 0.42s ease forwards';
+      path.style.animationDelay   = (i * 0.07).toFixed(2) + 's';
+
+      g.appendChild(path);
+    }
+  }());
+  </script>
+
+</body>
+</html>

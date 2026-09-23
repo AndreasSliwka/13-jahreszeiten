@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13 Jahreszeiten · Jahresplan 2026</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:             #0D0D0D;
+      --card:           #161616;
+      --card-current:   #1A1F0D;
+      --text:           #E8E8E8;
+      --accent:         #B5E837;
+      --muted:          #4A4A4A;
+      --past-bg:        #2A2A2A;
+      --past-text:      #5A5A5A;
+      --future-bg:      #141414;
+      --future-text:    #333333;
+      --border:         #2A2A2A;
+      --border-current: #B5E837;
+      --font: ui-monospace, 'SF Mono', 'Courier New', Consolas, monospace;
+    }
+
+    @keyframes cursor-blink {
+      0%,  100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none !important; opacity: 1; }
+    }
+
+    /* ── BASE ──────────────────────────────────────── */
+
+    body {
+      background:  var(--bg);
+      color:       var(--text);
+      font-family: var(--font);
+      font-size:   11px;
+      line-height: 1.65;
+      min-height:  100vh;
+    }
+
+    /* Plotter-print accent stripe */
+    .accent-stripe {
+      height: 3px;
+      background: var(--accent);
+      width: 100%;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 36px 28px 64px;
+    }
+
+    /* ── HEADER ────────────────────────────────────── */
+
+    .hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .hdr-wordmark {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .hdr-sub {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      margin-top: 7px;
+    }
+
+    .hdr-badge {
+      background:     var(--accent);
+      color:          #080808;
+      font-size:      11px;
+      font-weight:    700;
+      letter-spacing: 0.1em;
+      padding:        4px 10px;
+      flex-shrink:    0;
+      align-self:     flex-start;
+    }
+
+    /* ── SHARED ────────────────────────────────────── */
+
+    .rule {
+      border:     none;
+      border-top: 1px solid var(--border);
+      margin:     28px 0;
+    }
+
+    .section-lbl {
+      font-size:      10px;
+      color:          var(--muted);
+      letter-spacing: 0.2em;
+      margin-bottom:  14px;
+    }
+
+    .cursor {
+      display:   inline-block;
+      color:     var(--accent);
+      animation: cursor-blink 1s step-end infinite;
+    }
+
+    /* ── CURRENT CARD ──────────────────────────────── */
+
+    .current-card {
+      border:        1px solid var(--border-current);
+      background:    var(--card-current);
+      margin-bottom: 44px;
+    }
+
+    .current-head {
+      display:     flex;
+      align-items: flex-start;
+      gap:         20px;
+      padding:     22px 24px 18px;
+    }
+
+    .slot-num {
+      font-size:      48px;
+      font-weight:    700;
+      color:          var(--accent);
+      line-height:    1;
+      letter-spacing: -0.03em;
+      flex-shrink:    0;
+    }
+
+    .current-info {
+      flex:      1;
+      min-width: 0;
+    }
+
+    .current-title {
+      font-size:      20px;
+      font-weight:    700;
+      color:          var(--text);
+      letter-spacing: 0.06em;
+      line-height:    1.1;
+    }
+
+    .current-artist {
+      font-size:      13px;
+      color:          var(--muted);
+      letter-spacing: 0.04em;
+      margin-top:     5px;
+    }
+
+    .aktiv-badge {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            6px;
+      font-size:      10px;
+      font-weight:    700;
+      color:          var(--accent);
+      letter-spacing: 0.16em;
+      margin-top:     10px;
+    }
+
+    .aktiv-dot {
+      display:       inline-block;
+      width:         6px;
+      height:        6px;
+      border-radius: 50%;
+      background:    var(--accent);
+      flex-shrink:   0;
+    }
+
+    /* Photo */
+    .current-photo-wrap {
+      border-top:    1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position:      relative;
+    }
+
+    .current-photo {
+      display:    block;
+      width:      100%;
+      max-height: 460px;
+      object-fit: cover;
+    }
+
+    .photo-fallback {
+      display:         none;
+      height:          200px;
+      align-items:     center;
+      justify-content: center;
+      color:           var(--muted);
+      font-size:       11px;
+      letter-spacing:  0.1em;
+    }
+
+    /* Footer of current card */
+    .current-foot {
+      padding: 16px 24px 20px;
+    }
+
+    .current-dates {
+      font-size:      13px;
+      color:          var(--text);
+      letter-spacing: 0.05em;
+      margin-bottom:  12px;
+    }
+
+    .prog-row {
+      display:     flex;
+      align-items: center;
+      flex-wrap:   wrap;
+      gap:         10px;
+    }
+
+    .prog-bar {
+      font-size:      15px;
+      color:          var(--accent);
+      letter-spacing: 0.02em;
+      line-height:    1;
+    }
+
+    .prog-pct {
+      font-size:   11px;
+      font-weight: 700;
+      color:       var(--accent);
+    }
+
+    .prog-rem {
+      font-size: 11px;
+      color:     var(--muted);
+    }
+
+    /* ── YEAR GRID ─────────────────────────────────── */
+
+    .grid-wrap {
+      margin-bottom: 48px;
+    }
+
+    .grid {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   2px;
+      background:            #080808;
+      border:                1px solid var(--border);
+    }
+
+    @media (max-width: 580px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Base cell */
+    .cell {
+      padding:    13px 15px;
+      background: var(--card);
+    }
+
+    .cell.past   { background: var(--past-bg); }
+    .cell.future { background: var(--future-bg); }
+
+    .cell-num {
+      font-size:      11px;
+      font-weight:    700;
+      letter-spacing: 0.1em;
+    }
+
+    .cell.past   .cell-num { color: var(--past-text); }
+    .cell.future .cell-num { color: var(--future-text); }
+
+    .cell-status {
+      font-size:      10px;
+      letter-spacing: 0.04em;
+      margin-top:     4px;
+    }
+
+    .cell.past   .cell-status { color: #3C3C3C; }
+    .cell.future .cell-status { color: var(--future-text); }
+
+    .cell-name {
+      font-size:     10px;
+      color:         #3C3C3C;
+      margin-top:    5px;
+      white-space:   nowrap;
+      overflow:      hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cell-thumb {
+      display:    block;
+      width:      100%;
+      height:     50px;
+      object-fit: cover;
+      margin-top: 8px;
+      opacity:    0.35;
+      filter:     grayscale(0.4);
+      border:     1px solid #1A1A1A;
+    }
+
+    /* Active row — full width */
+    .cell.active-row {
+      grid-column:     1 / -1;
+      background:      var(--card-current);
+      border-left:     3px solid var(--border-current);
+      display:         flex;
+      justify-content: space-between;
+      align-items:     center;
+      flex-wrap:       wrap;
+      gap:             12px;
+      padding:         14px 18px;
+    }
+
+    .active-left  { flex: 1; min-width: 0; }
+    .active-right { flex-shrink: 0; text-align: right; }
+
+    .active-num {
+      font-size:      22px;
+      font-weight:    700;
+      color:          var(--accent);
+      line-height:    1;
+    }
+
+    .active-name {
+      font-size:      11px;
+      font-weight:    700;
+      color:          var(--text);
+      margin-top:     4px;
+      white-space:    nowrap;
+      overflow:       hidden;
+      text-overflow:  ellipsis;
+    }
+
+    .active-sub {
+      font-size:  10px;
+      color:      var(--muted);
+      margin-top: 3px;
+    }
+
+    .active-tag {
+      font-size:      10px;
+      font-weight:    700;
+      color:          var(--accent);
+      letter-spacing: 0.14em;
+    }
+
+    .active-prog {
+      font-size:      12px;
+      color:          var(--accent);
+      margin-top:     5px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────── */
+
+    .about-wrap {
+      border-top:  1px solid var(--border);
+      padding-top: 32px;
+    }
+
+    .readme {
+      font-family: var(--font);
+      font-size:   11px;
+      color:       var(--muted);
+      white-space: pre-wrap;
+      line-height: 1.85;
+    }
+
+    .readme-key   { color: var(--accent); }
+    .readme-cmmt  { color: #2E2E2E; }
+
+    /* ── FOOTER ────────────────────────────────────── */
+
+    .foot {
+      margin-top:     48px;
+      font-size:      10px;
+      color:          #252525;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="accent-stripe"></div>
+
+  <main></main>
+
+    <!-- ─── HEADER ──────────────────────────────────── -->
+    <header class="hdr">
+      <div>
+        <div class="hdr-wordmark">13 JAHRESZEITEN</div>
+        <div class="hdr-sub">KÖNIGSWINTER · KUNST IM ÖFFENTLICHEN RAUM · SEIT 2026</div>
+      </div>
+      <div class="hdr-badge">SAISON 07/13 AKTIV</div>
+    </header>
+
+    <hr class="rule">
+
+    <!-- ─── AKTUELLE AUSSTELLUNG ─────────────────────── -->
+    <section>
+      <div class="section-lbl">[AKTUELLE AUSSTELLUNG]</div>
+
+      <div class="current-card">
+
+        <div class="current-head">
+          <div class="slot-num">07</div>
+          <div class="current-info">
+            <div class="current-title">MONA LISA</div>
+            <div class="current-artist">Leonardo da Vinci</div>
+            <div class="aktiv-badge">
+              <span class="aktiv-dot"></span>
+              AKTIV<span class="cursor">▋</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="current-photo-wrap">
+          <img
+            class="current-photo"
+            src="../bilder/wand_2_with_monalisa.png"
+            alt="MONA LISA · Leonardo da Vinci · Saison 07 · Königswinter 2026"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+          <div class="photo-fallback">[FOTO NICHT VERFÜGBAR]</div>
+        </div>
+
+        <div class="current-foot">
+          <div class="current-dates">23.09.2026 — 20.10.2026</div>
+          <div class="prog-row">
+            <span class="prog-bar">████████████░░░░░░░░</span>
+            <span class="prog-pct">64%</span>
+            <span class="prog-rem">· 18 Tage verbleibend</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── JAHRESPLAN ───────────────────────────────── -->
+    <section class="grid-wrap">
+      <div class="section-lbl">[JAHRESPLAN 2026]</div>
+
+      <div class="grid">
+
+        <!-- Past: 01 -->
+        <div class="cell past">
+          <div class="cell-num">01</div>
+          <div class="cell-status">[BEENDET]</div>
+          <div class="cell-name">Stuhl am Rhein · T. Sliwka</div>
+        </div>
+
+        <!-- Past: 02 -->
+        <div class="cell past">
+          <div class="cell-num">02</div>
+          <div class="cell-status">[BEENDET]</div>
+          <div class="cell-name">Waldlichtung · Unbekannt</div>
+          <img
+            class="cell-thumb"
+            src="../bilder/Waldlichtung_with_overlay.png"
+            alt="Waldlichtung"
+            onerror="this.style.display='none';"
+          >
+        </div>
+
+        <!-- Past: 03 -->
+        <div class="cell past">
+          <div class="cell-num">03</div>
+          <div class="cell-status">[BEENDET]</div>
+          <div class="cell-name">Gitarre · Unbekannt</div>
+          <img
+            class="cell-thumb"
+            src="../bilder/Guitar_with_overlay.png"
+            alt="Gitarre"
+            onerror="this.style.display='none';"
+          >
+        </div>
+
+        <!-- Past: 04 -->
+        <div class="cell past">
+          <div class="cell-num">04</div>
+          <div class="cell-status">[BEENDET]</div>
+          <div class="cell-name">Stadtansicht · Unbekannt</div>
+        </div>
+
+        <!-- Past: 05 -->
+        <div class="cell past">
+          <div class="cell-num">05</div>
+          <div class="cell-status">[BEENDET]</div>
+          <div class="cell-name">Abstrakt I · Unbekannt</div>
+        </div>
+
+        <!-- Past: 06 -->
+        <div class="cell past">
+          <div class="cell-num">06</div>
+          <div class="cell-status">[BEENDET]</div>
+          <div class="cell-name">Herbstwald · Unbekannt</div>
+        </div>
+
+        <!-- Active: 07 — spans full row -->
+        <div class="cell active-row">
+          <div class="active-left">
+            <div class="active-num">07</div>
+            <div class="active-name">MONA LISA · Leonardo da Vinci</div>
+            <div class="active-sub">23.09.2026 — 20.10.2026</div>
+          </div>
+          <div class="active-right">
+            <div class="active-tag">→ AKTIV <span class="cursor">▋</span></div>
+            <div class="active-prog">████████████░░░░░░░░ 64%</div>
+          </div>
+        </div>
+
+        <!-- Future: 08 -->
+        <div class="cell future">
+          <div class="cell-num">08</div>
+          <div class="cell-status">[NOCH NICHT BEKANNT]</div>
+        </div>
+
+        <!-- Future: 09 -->
+        <div class="cell future">
+          <div class="cell-num">09</div>
+          <div class="cell-status">[NOCH NICHT BEKANNT]</div>
+        </div>
+
+        <!-- Future: 10 -->
+        <div class="cell future">
+          <div class="cell-num">10</div>
+          <div class="cell-status">[NOCH NICHT BEKANNT]</div>
+        </div>
+
+        <!-- Future: 11 -->
+        <div class="cell future">
+          <div class="cell-num">11</div>
+          <div class="cell-status">[NOCH NICHT BEKANNT]</div>
+        </div>
+
+        <!-- Future: 12 -->
+        <div class="cell future">
+          <div class="cell-num">12</div>
+          <div class="cell-status">[NOCH NICHT BEKANNT]</div>
+        </div>
+
+        <!-- Future: 13 -->
+        <div class="cell future">
+          <div class="cell-num">13</div>
+          <div class="cell-status">[NOCH NICHT BEKANNT]</div>
+        </div>
+
+      </div><!-- /.grid -->
+    </section>
+
+    <!-- ─── ÜBER DAS PROJEKT ─────────────────────────── -->
+    <section class="about-wrap">
+      <div class="section-lbl">[ÜBER DAS PROJEKT]</div>
+<pre class="readme"><span class="readme-key"># 13 JAHRESZEITEN</span>
+<span class="readme-cmmt"># Kunst im öffentlichen Raum · Königswinter</span>
+
+Alle vier Wochen wechselt ein großformatiges Kunstwerk
+(4 × 3 m) an einer prominenten Wand in der Fußgänger-
+zone von Königswinter. 13 Saisons pro Jahr — ein
+wachsendes Archiv der Jahreszeiten.
+
+<span class="readme-key">STATUS    :</span> Saison 07/13 läuft · 18 Tage verbleibend
+<span class="readme-key">STANDORT  :</span> Königswinter, Fußgängerzone
+<span class="readme-key">FORMAT    :</span> 400 cm × 300 cm, Plane-Druck
+<span class="readme-key">RHYTHMUS  :</span> 28 Tage pro Saison
+<span class="readme-key">BEGINN    :</span> Januar 2026
+</pre>
+    </section>
+
+    <div class="foot">// 13-JAHRESZEITEN · KÖNIGSWINTER · 2026 ·· EOF</div>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13 Jahreszeiten – Mona Lisa</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: #000;
+      color: #fff;
+      font-family: ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+    }
+
+    .hero__photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* Flat black bar — not a gradient. Film title card. */
+    .hero__titlecard {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.78);
+      padding: 18px 28px 20px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .hero__project-name {
+      font-family: 'Impact', Haettenschweiler, 'Arial Narrow', sans-serif;
+      font-size: clamp(30px, 7.5vw, 72px);
+      font-weight: 400; /* Impact has no weight variants */
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .hero__season {
+      font-family: 'Impact', Haettenschweiler, 'Arial Narrow', sans-serif;
+      font-size: clamp(16px, 3.2vw, 36px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #E63900;
+      line-height: 1;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── CONTENT WRAPPER ───────────────────────────────────────────── */
+    .content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── CURRENT ARTWORK ───────────────────────────────────────────── */
+    .artwork-header {
+      padding-top: 52px;
+    }
+
+    .artwork-title {
+      font-family: 'Arial Black', 'Impact', Haettenschweiler, sans-serif;
+      font-size: clamp(48px, 12vw, 108px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+      color: #fff;
+    }
+
+    .artwork-meta {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .artwork-meta__artist {
+      font-size: 16px;
+      color: #bbb;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .artwork-meta__dot {
+      color: #444;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .artwork-meta__countdown {
+      font-family: 'Impact', Haettenschweiler, sans-serif;
+      font-size: 17px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #E63900;
+    }
+
+    .divider {
+      border: none;
+      border-top: 2px solid #E63900;
+      margin: 36px 0;
+    }
+
+    .artwork-description {
+      font-size: clamp(17px, 2.4vw, 21px);
+      line-height: 1.7;
+      color: #ccc;
+      max-width: 60ch;
+    }
+
+    /* ── PAST ARTWORKS ─────────────────────────────────────────────── */
+    .past-section {
+      margin-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .section-label {
+      font-family: 'Arial Black', 'Impact', Haettenschweiler, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    .past-card {
+      background: #0d0d0d;
+      border: 1px solid #222;
+      overflow: hidden;
+    }
+
+    .past-card__img-wrap {
+      overflow: hidden;
+    }
+
+    .past-card__img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      filter: grayscale(15%) brightness(0.9);
+      transition: filter 0.3s ease, transform 0.4s ease;
+    }
+
+    .past-card:hover .past-card__img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.03);
+    }
+
+    .past-card__body {
+      padding: 14px 16px 16px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .past-card__season {
+      font-family: 'Impact', Haettenschweiler, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #E63900;
+      margin-bottom: 6px;
+    }
+
+    .past-card__title {
+      font-family: 'Arial Black', Impact, sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .past-card__artist {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 22px 28px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a3a3a;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .hero__titlecard {
+        padding: 14px 16px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+
+      .content {
+        padding: 0 16px;
+      }
+
+      .artwork-header {
+        padding-top: 36px;
+      }
+
+      .past-section {
+        margin-top: 52px;
+        padding-bottom: 52px;
+      }
+
+      .footer {
+        padding: 20px 16px;
+      }
+    }
+
+    /* Subtle entrance for the hero photo */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero__photo {
+        animation: heroIn 0.9s ease-out both;
+      }
+
+      @keyframes heroIn {
+        from { opacity: 0; transform: scale(1.04); }
+        to   { opacity: 1; transform: scale(1); }
+      }
+
+      .hero__titlecard {
+        animation: barIn 0.6s 0.4s ease-out both;
+      }
+
+      @keyframes barIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO: full viewport, no padding — the building IS the design -->
+  <section class="hero">
+    <img
+      class="hero__photo"
+      src="../bilder/wand_2_with_monalisa.png"
+      alt="Gebäudewand in Königswinter mit der Reproduktion der Mona Lisa von Leonardo da Vinci"
+    >
+    <div class="hero__titlecard">
+      <span class="hero__project-name">13 Jahreszeiten</span>
+      <span class="hero__season">Saison 07/13</span>
+    </div>
+  </section>
+
+  <!-- CURRENT ARTWORK -->
+  <main>
+    <div class="content">
+      <header class="artwork-header">
+        <h1 class="artwork-title">Mona Lisa</h1>
+        <div class="artwork-meta">
+          <span class="artwork-meta__artist">Leonardo da Vinci</span>
+          <span class="artwork-meta__dot" aria-hidden="true">·</span>
+          <span class="artwork-meta__countdown">Noch 18 Tage</span>
+        </div>
+      </header>
+
+      <hr class="divider">
+
+      <p class="artwork-description">
+        Das bekannteste Gemälde der Welt hängt jetzt in Königswinter.
+        Für genau 28 Tage. Dann kommt das nächste.
+      </p>
+
+      <!-- PAST ARTWORKS -->
+      <section class="past-section" aria-label="Frühere Werke">
+        <p class="section-label">Frühere Werke</p>
+        <div class="past-grid">
+
+          <article class="past-card">
+            <div class="past-card__img-wrap">
+              <img
+                class="past-card__img"
+                src="../bilder/Waldlichtung_with_overlay.png"
+                alt="Waldlichtung — Werk der Saison 06/13"
+              >
+            </div>
+            <div class="past-card__body">
+              <p class="past-card__season">Saison 06/13</p>
+              <p class="past-card__title">Waldlichtung</p>
+              <p class="past-card__artist">Unbekannt</p>
+            </div>
+          </article>
+
+          <article class="past-card">
+            <div class="past-card__img-wrap">
+              <img
+                class="past-card__img"
+                src="../bilder/Guitar_with_overlay.png"
+                alt="Guitar — Werk der Saison 05/13"
+              >
+            </div>
+            <div class="past-card__body">
+              <p class="past-card__season">Saison 05/13</p>
+              <p class="past-card__title">Guitar</p>
+              <p class="past-card__artist">Unbekannt</p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    Kunst im öffentlichen Raum · Königswinter
+  </footer>
+
+</body>
+</html>

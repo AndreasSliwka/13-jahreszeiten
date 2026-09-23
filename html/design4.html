@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13 Jahreszeiten – Königswinter</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, Arial, sans-serif;
+      background: #3A2000;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       CORK BOARD
+       ============================================================ */
+    .board {
+      position: relative;
+      min-height: max(100vh, 800px);
+      width: 100%;
+
+      /* Cork base colour */
+      background-color: #8B6914;
+
+      /* Cork texture: layered grain + cell dots */
+      background-image:
+        /* Diagonal grain streaks */
+        repeating-linear-gradient(
+          -11deg,
+          transparent          0px,
+          transparent          5px,
+          rgba(0,0,0,0.030)    5px,
+          rgba(0,0,0,0.030)    6px,
+          transparent          6px,
+          transparent         14px,
+          rgba(190,140,30,.045) 14px,
+          rgba(190,140,30,.045) 15px
+        ),
+        /* Cross-grain */
+        repeating-linear-gradient(
+          79deg,
+          transparent       0px,
+          transparent       9px,
+          rgba(0,0,0,0.018) 9px,
+          rgba(0,0,0,0.018) 10px
+        ),
+        /* Cork-cell ellipses */
+        repeating-radial-gradient(
+          ellipse 58px 38px at 0px 0px,
+          transparent        0px,
+          transparent        11px,
+          rgba(0,0,0,0.045)  13px,
+          transparent        17px
+        ),
+        repeating-radial-gradient(
+          ellipse 46px 32px at 29px 19px,
+          transparent           0px,
+          transparent           9px,
+          rgba(110,70,0,0.040)  11px,
+          transparent           15px
+        ),
+        /* Warm-highlight centre bloom */
+        radial-gradient(
+          ellipse 70% 60% at 50% 42%,
+          rgba(210,160,50,.08) 0%,
+          transparent          100%
+        );
+
+      /* Subtle depth vignette */
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.38);
+    }
+
+    /* Wooden frame border — sits above cork, below cards */
+    .board-frame {
+      position: absolute;
+      inset: 0;
+      border: 14px solid #5A3808;
+      box-shadow:
+        inset 0  2px  8px rgba(0,0,0,0.45),
+        inset 0  0   24px rgba(0,0,0,0.18),
+        inset 0 -2px  6px rgba(255,200,80,.06);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    /* Tiny branding label on the frame */
+    .board-label {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 12.5px;
+      color: rgba(255, 235, 175, 0.60);
+      white-space: nowrap;
+      letter-spacing: 0.13em;
+      z-index: 51;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ============================================================
+       CARD BASE
+       ============================================================ */
+    .card {
+      position: absolute;
+      border-radius: 2px;
+      padding: 16px;
+      /* Physically plausible layered shadow */
+      box-shadow:
+        1px  1px  2px  rgba(0,0,0,0.22),
+        3px  4px  9px  rgba(0,0,0,0.20),
+        7px 11px 22px  rgba(0,0,0,0.15),
+        14px 20px 42px rgba(0,0,0,0.10);
+    }
+
+    /* ============================================================
+       PIN
+       ============================================================ */
+    .pin {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      box-shadow:
+        inset  2px  2px  4px rgba(255,255,255,0.28),
+        inset -1px -2px  3px rgba(0,0,0,0.30),
+        0       2px  7px rgba(0,0,0,0.55);
+    }
+
+    /* Pin needle shadow going into the board */
+    .pin::after {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 14px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.28), rgba(0,0,0,0.07));
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 3px 3px;
+    }
+
+    .pin-red   { background: radial-gradient(circle at 38% 32%, #ff6655 0%, #CC2200 62%, #8B0000 100%); }
+    .pin-gold  { background: radial-gradient(circle at 38% 32%, #FFE866 0%, #D4A800 62%, #997000 100%); }
+    .pin-blue  { background: radial-gradient(circle at 38% 32%, #6688EE 0%, #2244CC 62%, #122288 100%); }
+    .pin-green { background: radial-gradient(circle at 38% 32%, #6ABE60 0%, #4A7C3F 62%, #2C5020 100%); }
+
+    /* ============================================================
+       MAIN CARD  (central, largest)
+       ============================================================ */
+    .card-main {
+      width: 340px;
+      top: 108px;
+      left: calc(50% - 170px);
+      transform: rotate(-1.5deg);
+      background: #FEFCF7;
+      z-index: 10;
+      padding: 14px 14px 22px;
+    }
+
+    /* Tape strips at top corners */
+    .card-main::before,
+    .card-main::after {
+      content: '';
+      position: absolute;
+      width: 54px;
+      height: 15px;
+      background: rgba(255, 234, 90, 0.52);
+      border: 1px solid rgba(210, 185, 55, 0.36);
+      border-radius: 1px;
+      top: -5px;
+    }
+    .card-main::before {
+      left: 16px;
+      transform: rotate(-5.5deg);
+    }
+    .card-main::after {
+      right: 16px;
+      transform: rotate(4.5deg);
+    }
+
+    .main-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      border: 1px solid #DDD9CF;
+    }
+
+    .main-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #E8B84B;
+      margin-top: 13px;
+    }
+
+    .main-title {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+      font-size: 44px;
+      line-height: 0.96;
+      color: #1A1A1A;
+      margin-top: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .main-subtitle {
+      font-family: Georgia, serif;
+      font-size: 12px;
+      color: #555;
+      margin-top: 5px;
+    }
+
+    .main-meta {
+      margin-top: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #4A7C3F;
+      padding: 3px 9px;
+      border-radius: 2px;
+    }
+
+    .countdown {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      font-weight: bold;
+      color: #CC2200;
+    }
+
+    /* ============================================================
+       INFO CARD  (upper left, +2°)
+       ============================================================ */
+    .card-info {
+      width: 220px;
+      top: 68px;
+      left: 80px;
+      transform: rotate(2deg);
+      background: #FFF9EC;
+      z-index: 6;
+    }
+
+    /* ============================================================
+       PAST ARTWORK 1  (left, −3°)
+       ============================================================ */
+    .card-past-1 {
+      width: 210px;
+      top: 345px;
+      left: 52px;
+      transform: rotate(-3deg);
+      background: #F0F7FF;
+      z-index: 5;
+    }
+
+    /* ============================================================
+       PAST ARTWORK 2  (right, +1°)
+       ============================================================ */
+    .card-past-2 {
+      width: 210px;
+      top: 375px;
+      right: 62px;
+      transform: rotate(1deg);
+      background: #FFF0F0;
+      z-index: 7;
+    }
+
+    /* ============================================================
+       TEASER CARD  (upper right, −0.5°)
+       ============================================================ */
+    .card-teaser {
+      width: 215px;
+      top: 72px;
+      right: 72px;
+      transform: rotate(-0.5deg);
+      background: #FEFCF7;
+      z-index: 8;
+    }
+
+    /* ============================================================
+       KURATORIUM CARD  (lower right of centre, +2.5°)
+       ============================================================ */
+    .card-kuratorium {
+      width: 238px;
+      top: 534px;
+      left: calc(50% + 88px);
+      transform: rotate(2.5deg);
+      background: #FFF9EC;
+      z-index: 6;
+    }
+
+    /* ============================================================
+       SHARED CARD CONTENT STYLES
+       ============================================================ */
+    .card-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      border: 1px solid #DDD;
+      margin-bottom: 10px;
+    }
+
+    .card-label {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 10.5px;
+      color: #9A9080;
+      margin-bottom: 4px;
+    }
+
+    .card-heading {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-weight: bold;
+      color: #1A1A1A;
+      line-height: 1.28;
+      margin-bottom: 7px;
+    }
+
+    .card-body {
+      font-size: 12px;
+      color: #525252;
+      line-height: 1.58;
+    }
+
+    /* Teaser-specific */
+    .teaser-date {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+      font-size: 22px;
+      line-height: 1.15;
+      color: #4A7C3F;
+      margin-top: 8px;
+    }
+
+    /* Kuratorium-specific */
+    .kurat-number {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+      font-size: 56px;
+      line-height: 1;
+      color: #E8B84B;
+      margin: 6px 0 0;
+    }
+
+    .kurat-persons {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 11px;
+      color: #8A8070;
+      margin-bottom: 8px;
+    }
+
+    /* ============================================================
+       MOBILE  (≤ 768px) — stack vertically, keep subtle tilts
+       ============================================================ */
+    @media (max-width: 768px) {
+
+      .board {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        padding: 50px 20px 70px;
+        min-height: 100vh;
+        height: auto;
+      }
+
+      .board-frame  { display: none; }
+      .board-label  { display: none; }
+
+      /* Strip absolute positioning from every card */
+      .card {
+        position: relative !important;
+        top:    auto !important;
+        left:   auto !important;
+        right:  auto !important;
+        bottom: auto !important;
+        width: min(90vw, 360px) !important;
+      }
+
+      /* Preserve individual tilts */
+      .card-main       { transform: rotate(-1.5deg) !important; }
+      .card-info       { transform: rotate(2deg)    !important; }
+      .card-past-1     { transform: rotate(-2deg)   !important; }
+      .card-past-2     { transform: rotate(1deg)    !important; }
+      .card-teaser     { transform: rotate(-0.5deg) !important; }
+      .card-kuratorium { transform: rotate(2.5deg)  !important; }
+
+      .main-title { font-size: 38px; }
+    }
+
+    /* Very small phones */
+    @media (max-width: 400px) {
+      .card { width: 95vw !important; }
+      .main-title { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="board">
+
+    <!-- Board chrome -->
+    <div class="board-frame" aria-hidden="true"></div>
+    <p class="board-label" aria-hidden="true">— 13 Jahreszeiten · Königswinter —</p>
+
+    <!-- ══════════════════════════════════════════
+         HAUPTKARTE  ·  current artwork
+         ══════════════════════════════════════════ -->
+    <article class="card card-main">
+      <div class="pin pin-red" aria-hidden="true"></div>
+
+      <img
+        class="main-image"
+        src="../bilder/wand_2_with_monalisa.png"
+        alt="Mona Lisa, großformatig gedruckt an der Hauswand in der Königswinterer Fußgängerzone"
+        loading="eager"
+      >
+
+      <p class="main-eyebrow">Aktuell zu sehen</p>
+      <h1 class="main-title">MONA LISA</h1>
+      <p class="main-subtitle">Leonardo da Vinci · ca.&nbsp;1503–1519</p>
+
+      <div class="main-meta">
+        <span class="badge">Saison 07 / 13</span>
+        <span class="countdown">⏳ Noch&nbsp;18&nbsp;Tage</span>
+      </div>
+    </article>
+
+    <!-- ══════════════════════════════════════════
+         INFO-KARTE  ·  upper left
+         ══════════════════════════════════════════ -->
+    <article class="card card-info">
+      <div class="pin pin-gold" aria-hidden="true"></div>
+
+      <p class="card-label">Was ist das hier?</p>
+      <h2 class="card-heading">Was hängt da?</h2>
+      <p class="card-body">
+        Alle 4 Wochen wechselt das Bild an der Wand.
+        13&thinsp;Mal im Jahr. Ein Kuratorium wählt
+        die Werke aus.
+      </p>
+    </article>
+
+    <!-- ══════════════════════════════════════════
+         VERGANGENES WERK 1  ·  left side
+         ══════════════════════════════════════════ -->
+    <article class="card card-past-1">
+      <div class="pin pin-blue" aria-hidden="true"></div>
+
+      <img
+        class="card-image"
+        src="../bilder/Waldlichtung_with_overlay.png"
+        alt="Waldlichtung – Saison 06"
+        loading="lazy"
+      >
+      <p class="card-label">Saison 06</p>
+      <h3 class="card-heading">Waldlichtung</h3>
+    </article>
+
+    <!-- ══════════════════════════════════════════
+         VERGANGENES WERK 2  ·  right side
+         ══════════════════════════════════════════ -->
+    <article class="card card-past-2">
+      <div class="pin pin-blue" aria-hidden="true"></div>
+
+      <img
+        class="card-image"
+        src="../bilder/Guitar_with_overlay.png"
+        alt="Gitarre – Saison 05"
+        loading="lazy"
+      >
+      <p class="card-label">Saison 05</p>
+      <h3 class="card-heading">Gitarre</h3>
+    </article>
+
+    <!-- ══════════════════════════════════════════
+         TEASER-KARTE  ·  upper right
+         ══════════════════════════════════════════ -->
+    <article class="card card-teaser">
+      <div class="pin pin-green" aria-hidden="true"></div>
+
+      <p class="card-label">Demnächst</p>
+      <h2 class="card-heading">Saison 08</h2>
+      <p class="card-body">Das nächste Werk kommt am</p>
+      <p class="teaser-date">11.&nbsp;Oktober<br>2026</p>
+    </article>
+
+    <!-- ══════════════════════════════════════════
+         KURATORIUM-KARTE  ·  lower centre-right
+         ══════════════════════════════════════════ -->
+    <article class="card card-kuratorium">
+      <div class="pin pin-gold" aria-hidden="true"></div>
+
+      <p class="card-label">Hinter dem Projekt</p>
+      <h2 class="card-heading">Das Kuratorium</h2>
+      <div class="kurat-number" aria-label="7 Personen">7</div>
+      <p class="kurat-persons">Personen</p>
+      <p class="card-body">Künstler, Vereine &amp; Anwohner</p>
+    </article>
+
+  </main>
+</body>
+</html>
