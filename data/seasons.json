@@ -1,9 +1,8 @@
 {
   "siteTitle": "13 Jahreszeiten",
-  "location": "Königswinter",
-  "totalSeasons": 13,
   "seasons": [
     {
+      "seasonNumber": "07/26",
       "image": "../bilder/wand_2_with_monalisa.png",
       "title": "Mona Lisa",
       "artist": "Leonardo da Vinci",
@@ -13,6 +12,7 @@
       "description": "Das berühmteste Gemälde der Welt besucht die Fußgängerzone Königswinters. Leonardo da Vinci malte das Porträt der Lisa Gherardini zwischen 1503 und 1519 – seitdem ist es der Inbegriff künstlerischer Vollendung. Der rätselhafte Blick folgt einem auf Schritt und Tritt."
     },
     {
+      "seasonNumber": "06/26",
       "image": "../bilder/Waldlichtung_with_overlay.png",
       "title": "Waldlichtung",
       "artist": "Unbekannt",
@@ -22,6 +22,7 @@
       "description": "Eine stille Lichtung im Gegenlicht der Morgensonne. Das Werk holt die Natur der Siebengebirgshänge in die Fußgängerzone – ein ruhiger Gegenpol zum Treiben der Altstadt."
     },
     {
+      "seasonNumber": "05/26",
       "image": "../bilder/Guitar_with_overlay.png",
       "title": "Gitarre",
       "artist": "Unbekannt",
@@ -31,6 +32,7 @@
       "description": "Eine akustische Gitarre, in Szene gesetzt wie ein Stillleben. Das Bild erinnert an die Musik, die in den Gassen Königswinters immer wieder zu hören ist – bei Straßenmusik, Festivals und an lauen Sommerabenden am Rhein."
     },
     {
+      "seasonNumber": "04/26",
       "image": "../bilder/wand_2_with_waldlichtung.png",
       "title": "Waldlichtung (Wand)",
       "artist": "Unbekannt",
@@ -40,6 +42,7 @@
       "description": "Dasselbe Motiv, eine andere Wand: die Waldlichtung als großformatige Fotografie direkt an der Hausfassade. Ein Experiment in Maßstab und Ort."
     },
     {
+      "seasonNumber": "03/26",
       "image": "wand_3_with_placeholder.png",
       "title": "Platzhalter III",
       "artist": "Unbekannt",
@@ -49,6 +52,7 @@
       "description": "Dieses Werk ist noch nicht dokumentiert. Informationen werden nachgereicht."
     },
     {
+      "seasonNumber": "02/26",
       "image": "wand_4_with_placeholder.png",
       "title": "Platzhalter IV",
       "artist": "Unbekannt",
@@ -58,6 +62,7 @@
       "description": "Dieses Werk ist noch nicht dokumentiert. Informationen werden nachgereicht."
     },
     {
+      "seasonNumber": "01/26",
       "image": "wand_1_with_placeholder.png",
       "title": "Platzhalter I",
       "artist": "Unbekannt",
