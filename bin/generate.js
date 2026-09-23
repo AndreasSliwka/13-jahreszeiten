@@ -14,13 +14,13 @@ function flag(name) {
   return (i !== -1 && argv[i + 1]) ? argv[i + 1] : null;
 }
 
-const dataPath     = argv.find(a => !a.startsWith('-'));
-const templatePath = flag('--template') ?? path.resolve(__dirname, '..', 'template.html');
+const dataPath     = flag('--data') ?? path.resolve(__dirname, '..', 'src' ,'seasons.json');
+const templatePath = flag('--template') ?? path.resolve(__dirname, '..', 'src' ,'template.html');
 const outputPath   = flag('--output')   ?? path.resolve(__dirname, '..', 'html', 'index.html');
 
 if (!dataPath) {
   process.stderr.write(
-    'Usage: generate.js <data.json> [--template <file>] [--output <file>]\n'
+    'Usage: generate.js [--data <data.json>] [--template <file>] [--output <file>]\n'
   );
   process.exit(1);
 }
